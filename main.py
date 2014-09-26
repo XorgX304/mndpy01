@@ -16,7 +16,7 @@ MAIN_PAGE_HTML = """
         <option value="yes">yes</option>
         <option value="no">no</option>
       </select>
-      <div><input type="submit" value="enter your answer"></div>
+      <div><input type="submit" value="enter"></div>
     </form>
   </body>
 </html>
