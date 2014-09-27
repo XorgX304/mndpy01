@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 {% autoescape true %}
 <html>
+  <head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <title>response</title>
+  </head>
   <body>
-   
-
-    {{snidecomment}}
-
+    <p>You answered <b>{{answer}}</b></p>
+    <p><b>I say {{snidecomment}} </b></p>
   </body>
 </html>
 {% endautoescape %}
