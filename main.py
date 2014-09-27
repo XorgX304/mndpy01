@@ -1,5 +1,19 @@
+import os
+import urllib
+
+
 import webapp2
 import cgi
+
+
+import jinja2
+import webapp2
+
+
+JINJA_ENVIRONMENT = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
 
 
 MAIN_PAGE_HTML = """
@@ -35,11 +49,16 @@ class Response(webapp2.RequestHandler):
         answer = cgi.escape(self.request.get('answer'))
         
         if answer == "yes":
-          self.response.write('yes ... she is bossy')
+            snidecomment = 'yes ... she is bossy'
         else:
-          self.response.write ('no ... well sometimes she is') 
+            snidecomment = 'no ... well sometimes she is'
         
-        self.response.write('</pre></body></html>')
+        template_values = {
+            'snidecomment': snidecomment,
+        }
+
+        template = JINJA_ENVIRONMENT.get_template('index.html')
+        self.response.write(template.render(template_values))
 
 application = webapp2.WSGIApplication([
     ('/', MainPage),
