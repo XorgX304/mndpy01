@@ -43,7 +43,6 @@ class MainPage(webapp2.RequestHandler):
 
 class Response(webapp2.RequestHandler):
     def post(self):
-        self.response.write('<html><head><meta http-equiv="refresh" content="3;/" /><title>response</title></head><body><pre>')
         answer = cgi.escape(self.request.get('answer'))
         
         if answer == "yes":
