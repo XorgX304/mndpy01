@@ -1,6 +1,19 @@
 import webapp2
 import cgi
+import jinja2
+import os
+import urllib
+from google.appengine.ext import ndb
 
+
+JINJA_ENVIRONMENT = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
+
+def database_key(database_name='mnddb01'):
+        """Constructs a Datastore key for a Guestbook entity with guestbook_name."""
+        return ndb.Key('db', database_name)
 
 MAIN_PAGE_HTML = """
 <html>
@@ -31,15 +44,31 @@ class MainPage(webapp2.RequestHandler):
 
 class Response(webapp2.RequestHandler):
     def post(self):
-        self.response.write('<html><head><meta http-equiv="refresh" content="3;/" /><title>response</title></head><body><pre>')
         answer = cgi.escape(self.request.get('answer'))
         
         if answer == "yes":
-          self.response.write('yes ... she is bossy')
+            snidecomment = 'yes ... she is bossy'
         else:
-          self.response.write ('no ... well sometimes she is') 
+            snidecomment = 'no ... well sometimes she is'
         
-        self.response.write('</pre></body></html>')
+        self.response.write('</pre></body></html>')       
+
+        template_values = {
+            'meta' :  '<meta http-equiv="refresh" content="3;/" />',
+            'title' : 'response',           
+            'snidecomment': snidecomment,
+            'answer': answer,
+        }
+
+        template = JINJA_ENVIRONMENT.get_template('/templates/mytemplate.html')
+        self.response.write(template.render(template_values))
+        
+
+class Greeting(ndb.Model):
+    """Models an individual database entry."""
+    comment = ndb.StringProperty(indexed=False)
+    date = ndb.DateTimeProperty(auto_now_add=True)
+   
 
 application = webapp2.WSGIApplication([
     ('/', MainPage),
