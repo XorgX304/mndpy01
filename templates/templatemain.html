@@ -1,0 +1,15 @@
+{% extends "templates/templatesite.html" %}
+{% block content %}
+
+<form action="/response" method="post">
+  is my wife bossy?
+  <select name="answer">
+    <option value="yes">yes</option>
+    <option value="no">no</option>
+  </select>
+  <br />
+  <input type="submit" value="enter">
+</form>
+
+{% endblock %}
+

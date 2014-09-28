@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    {{meta|safe}}
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <h2>My Wine</h2>
+          <hr>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <hr>
+          <small>&copy; Mark Dennis - 2014</small>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      
+    </div>
+  </body>
+  {% endautoescape %}
+</html>
