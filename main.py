@@ -14,10 +14,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 def database_key(database_name='mnddb01'):
         """Constructs a Datastore key for a Guestbook entity with guestbook_name."""
         return ndb.Key('db', database_name)
-
-
-
-
+    
 class MainPage(webapp2.RequestHandler):
     def get(self):
         template_values = { 
@@ -26,27 +23,6 @@ class MainPage(webapp2.RequestHandler):
 
         template = JINJA_ENVIRONMENT.get_template('/templates/templatemain.html')
         self.response.write(template.render(template_values))
-        
-'''
-class Response(webapp2.RequestHandler):
-    def post(self):
-        answer = cgi.escape(self.request.get('answer'))
-        
-        if answer == "yes":
-            snidecomment = 'yes ... she is bossy'
-        else:
-            snidecomment = 'no ... well sometimes she is'
-
-        template_values = {
-            'meta' :  '<meta http-equiv="refresh" content="3;/" />',
-            'title' : 'response',           
-            'snidecomment': snidecomment,
-            'answer': answer,
-        }
-
-        template = JINJA_ENVIRONMENT.get_template('/templates/templateresult.html')
-        self.response.write(template.render(template_values))
-'''
         
 
 class Greeting(ndb.Model):
