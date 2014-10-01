@@ -33,5 +33,5 @@ class Greeting(ndb.Model):
 
 application = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/response', 'response.Response'),
+    ('/response', 'response1.Response'),
 ], debug=True)
